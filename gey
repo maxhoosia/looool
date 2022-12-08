@@ -1,0 +1,110 @@
+from tkinter import*
+import tkinter.messagebox as mb
+import math
+def dzastin_biber (text):
+    stray="1234567890()-+/*%"
+    delenie = 0
+    if text != "=":
+        if text in stray:
+            perem = entry.get()
+            entry.delete(0,END)
+            entry.insert(0,perem+text)
+            if text== "/":
+                delenie=1
+                print(0)
+        elif text =="CE":
+            entry.delete(0, END)
+        elif text=="DEL":
+            perem = entry.get()
+            entry.delete(0,END)
+            perem1=perem[:-1]
+            entry.insert(0,perem1)
+        elif text == "**2":
+            perem = entry.get()
+            entry.delete(0,END)
+            entry.insert(0, perem + text)
+        elif text =="**0,5":
+            perem = entry.get()
+            entry.delete(0, END)
+            perem1=math.sqrt(int(perem))
+            a = str(perem1)
+            if a[-1] == "0" and a[-2] == ".":
+                perem2 = a[:-2]
+            else:
+                perem2 = a
+            entry.insert(0,perem2 )
+    elif text == "=":
+        perem = entry.get()
+
+        if delenie==1:
+            try:
+                perem1 = eval(entry.get())
+            except ZeroDivisionError:
+                entry.delete(0, END)
+                entry.insert(0, "Zero")
+                mb.showerror("Предупреждение","Деление на ноль, осуждаю")
+        perem1 = eval(entry.get())
+        a=str(perem1)
+        if a[-1] == "0" and a[-2]==".":
+            perem2=a[:-2]
+        else:
+            perem2=a
+        entry.delete(0, END)
+        entry.insert(0, perem+text+str(perem2))
+
+
+
+window =Tk()
+window.geometry("575x280")
+
+w = 15
+h = 3
+odin = Button(height=h, width=w,text="1",command=lambda:dzastin_biber('1'))
+dva = Button(height=h, width=w,text="2",command=lambda:dzastin_biber('2'))
+tri = Button(height=h, width=w,text="3",command=lambda:dzastin_biber('3'))
+chet = Button(height=h, width=w,text="4",command=lambda:dzastin_biber('4'))
+pat = Button(height=h, width=w,text="5",command=lambda:dzastin_biber('5'))
+six = Button(height=h, width=w,text="6",command=lambda:dzastin_biber('6'))
+seven = Button(height=h, width=w,text="7",command=lambda:dzastin_biber('7'))
+vosem = Button(height=h, width=w,text="8",command=lambda:dzastin_biber('8'))
+dev = Button(height=h, width=w,text="9",command=lambda:dzastin_biber('9'))
+ravno = Button(height=h, width=w,text="=",background="light blue",command=lambda:dzastin_biber("="))
+delen = Button(height=h, width=w,text="/",background="light gray",command=lambda:dzastin_biber('/'))
+plus = Button(height=h, width=w,text="+",background="light gray",command=lambda:dzastin_biber('+'))
+minus = Button(height=h, width=w,text="-",background="light gray",command=lambda:dzastin_biber('-'))
+umn = Button(height=h, width=w,text="*",background="light gray",command=lambda:dzastin_biber('*'))
+nol = Button(height=h, width=w,text="0",command=lambda:dzastin_biber('0'))
+scob1 = Button(height=h, width=w,text="(",background="light gray",command=lambda:dzastin_biber('('))
+scob2 = Button(height=h, width=w,text=")",background="light gray",command=lambda:dzastin_biber(')'))
+ce = Button(height=h, width=w,text="CE",background="light blue",command=lambda:dzastin_biber('CE'))
+delka = Button(height=h, width=w,text="DEL",background="light gray",command=lambda:dzastin_biber('DEL'))
+ctep = Button(height=h, width=w,text="x²",background="light gray",command=lambda:dzastin_biber('**2'))
+koren = Button(height=h, width=w,text="√",background="light gray",command=lambda:dzastin_biber('**0,5'))
+proz = Button(height=h, width=w,text="%",background="light gray",command=lambda:dzastin_biber('%'))
+entry = Entry(width=15,font="Arial 30")
+
+odin.grid(column=0,row=1)
+dva.grid(column=1,row=1)
+tri.grid(column=2,row=1)
+chet.grid(column=0,row=2)
+pat.grid(column=1,row=2)
+six.grid(column=2,row=2)
+seven.grid(column=0,row=3)
+vosem.grid(column=1,row=3)
+dev.grid(column=2,row=3)
+delen.grid(column=4,row=4)
+ravno.grid(column=4,row=0)
+umn.grid(column=4,row=3)
+plus.grid(column=4,row=1)
+nol.grid(column=1,row=4)
+minus.grid(column=4,row=2)
+scob1.grid(column=0,row=4)
+scob2.grid(column=2,row=4)
+delka.grid(column=5,row=0)
+ce.grid(column=5,row=1)
+ctep.grid(column=5,row=2)
+koren.grid(column=5,row=3)
+proz.grid(column=5,row=4)
+entry.grid(column=0,row=0,columnspan=3)
+
+window.mainloop()
